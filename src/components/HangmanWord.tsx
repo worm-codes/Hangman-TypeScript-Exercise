@@ -1,13 +1,17 @@
 import styled from "styled-components"
-
-const HangmanWord = () => {
-    const word='test'
-    const guessedLetters=['t','e']
+type HangmanWordProps={
+  wordToGuess:string,
+  guessedLetters:string[],
+  showAnswer?:boolean
+}
+const HangmanWord = ({wordToGuess,guessedLetters,showAnswer=false}:HangmanWordProps) => {
   return (
     <WordContainer>
-     
-        {word.split('').map((letter,index)=>( <UnderLine key={index}>
-        <Letter correct={guessedLetters.includes(letter)}>{letter}</Letter>
+        {wordToGuess.split('').map((letter,index)=>( <UnderLine key={index}>
+        <Letter 
+        remainingLetters={!guessedLetters.includes(letter)||showAnswer}
+        isCorrect={guessedLetters.includes(letter)||showAnswer}
+        >{letter}</Letter>
       </UnderLine>))}
     </WordContainer>
   )
@@ -26,6 +30,11 @@ const WordContainer=styled.div`
 const UnderLine=styled.div`
   border-bottom: 0.1em solid black;
 `
-const Letter=styled.div`
-  visibility: ${({correct})=>correct?'visible':'hidden'};;
+interface LettterProps {
+  readonly isCorrect: boolean;
+  readonly remainingLetters: boolean;
+}
+const Letter=styled.div<LettterProps>`
+  visibility: ${({isCorrect})=>isCorrect?'visible':'hidden'};;
+  color:${({remainingLetters})=>remainingLetters?'red':'black'}
 `

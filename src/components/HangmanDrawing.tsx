@@ -1,13 +1,14 @@
 import styled from "styled-components"
-const HangmanDrawing = () => {
+type HangmanDrawingProps={
+    numberOfGuesses:number
+}
+
+const HangmanDrawing = ({numberOfGuesses}:HangmanDrawingProps) => {
+    const BODY=[<Head/>,<Body/>,<RightArm/>,<LeftArm/>,<RightLeg/>,
+<LeftLeg/>,]
   return (
     <Rack>
-        <Head/>
-        <Body/>
-        <RightArm/>
-        <LeftArm/>
-        <RightLeg/>
-        <LeftLeg/>
+        {BODY.slice(0,numberOfGuesses)}
         <Acnhor4/>
         <Acnhor3/>
        <Acnhor2/>
