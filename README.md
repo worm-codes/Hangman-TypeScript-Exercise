@@ -1,4 +1,4 @@
-![Hangman](https://hangman-game-play.vercel.app/)
+[Hangman](https://hangman-game-play.vercel.app/)
 
 ```javascript
 const AboutApp = {
