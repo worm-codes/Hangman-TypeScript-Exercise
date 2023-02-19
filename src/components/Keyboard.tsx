@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import KEYS from "./keys.json"
+import useResponsive from "../../hooks/useResponsive"
 type KeyboardProps={
   activeLetters:string[],
   inActiveLetters:string[],
@@ -7,9 +8,10 @@ type KeyboardProps={
   disabled?:boolean
 }
 const Keyboard = ({activeLetters,inActiveLetters,addGuessedLetter,disabled}:KeyboardProps) => {
+  const {isTablet}=useResponsive()
   return (
     <div>
-      <KeyboardWrapper>
+      <KeyboardWrapper isTablet={isTablet}>
         {KEYS.map((key)=>{
         const isActive=activeLetters.includes(key)
         const isInActive=inActiveLetters.includes(key)
@@ -26,9 +28,9 @@ const Keyboard = ({activeLetters,inActiveLetters,addGuessedLetter,disabled}:Keyb
 
 export default Keyboard
 
-const KeyboardWrapper=styled.div`
+const KeyboardWrapper=styled.div<{isTablet:boolean}>`
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(75px,1fr));
+  grid-template-columns: ${({isTablet})=>isTablet?' repeat(auto-fit,minmax(50px,1fr))':' repeat(auto-fit,minmax(80px,1fr))'};
   gap: 0.5rem;
 `
 interface KeyboardButtonProps {

@@ -24,19 +24,21 @@ const Rack= styled.div`
 `
 const Acnhor1=styled.div`
     height: 10px;
-    width: 250px;
+    width: 90px;
+    position: absolute;
+    left:-40px;
     background-color: black;
 `
 const Acnhor2=styled.div`
-    height: 400px;
+    height: 350px;
     width: 10px;
     background-color: black;
-    margin-left: 120px;
+ 
 `
 const Acnhor3=styled.div`
     height: 10px;
-    width: 200px;
-    margin-left: 120px;
+    width: 180px;
+    /* margin-left: 10px; */
     background-color: black;
 `
 const Acnhor4=styled.div`
@@ -46,6 +48,7 @@ const Acnhor4=styled.div`
     position: absolute;
     top: 0;
     right: 0;
+
 `
 const Head=styled.div`
     width: 50px;

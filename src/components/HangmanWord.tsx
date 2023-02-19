@@ -1,14 +1,18 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import useResponsive from '../../hooks/useResponsive';
 type HangmanWordProps={
-  wordToGuess:string,
+  wordToGuess?:string,
   guessedLetters:string[],
   showAnswer?:boolean
+  isWinner?:boolean;
 }
-const HangmanWord = ({wordToGuess,guessedLetters,showAnswer=false}:HangmanWordProps) => {
+const HangmanWord = ({wordToGuess,guessedLetters,showAnswer=false,isWinner}:HangmanWordProps) => {
+  const {isTablet}=useResponsive();
   return (
-    <WordContainer>
-        {wordToGuess.split('').map((letter,index)=>( <UnderLine key={index}>
+    <WordContainer isTablet={isTablet}>
+        {wordToGuess?.split('').map((letter,index)=>( <UnderLine key={index}>
         <Letter 
+        isWinner={isWinner}
         remainingLetters={!guessedLetters.includes(letter)||showAnswer}
         isCorrect={guessedLetters.includes(letter)||showAnswer}
         >{letter}</Letter>
@@ -19,10 +23,10 @@ const HangmanWord = ({wordToGuess,guessedLetters,showAnswer=false}:HangmanWordPr
 
 export default HangmanWord
 
-const WordContainer=styled.div`
+const WordContainer=styled.div<{isTablet:boolean}>`
     display: flex;
     gap: .25em;
-    font-size: 6rem;
+    font-size: ${({isTablet})=>isTablet?'3rem':'4rem'};
     font-weight: bold;
     text-transform: uppercase;
     font-family: monospace;
@@ -33,8 +37,9 @@ const UnderLine=styled.div`
 interface LettterProps {
   readonly isCorrect: boolean;
   readonly remainingLetters: boolean;
+  readonly isWinner?:boolean;
 }
 const Letter=styled.div<LettterProps>`
   visibility: ${({isCorrect})=>isCorrect?'visible':'hidden'};;
-  color:${({remainingLetters})=>remainingLetters?'red':'black'}
+  color:${({remainingLetters,isWinner})=>remainingLetters?'red':isWinner?'green':'black'}
 `
