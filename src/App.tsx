@@ -71,14 +71,21 @@ const App=()=> {
 
   },[])
 
+  const resetGame=()=>{
+    setGuessedLetters([])
+    setWordToGuess(getWord(isTablet))
+  }
+
   return  <WrapperContainer isGameFinished={isLoser||isWinner} isTablet={isTablet}>
     
     {isTablet?
     <>
+     {isWinner||isLoser&&
      <WinOrLose>
-      {isWinner&&"You Win,refresh page to play again"}
-      {isLoser&&"You Lose,refresh page to play again"}
-    </WinOrLose>
+      {isWinner&&"You Win"}
+      {isLoser&&"You Lose"}
+      <RePlayButton onClick={resetGame}>Play Again</RePlayButton>
+    </WinOrLose>}
     {!isWinner&&<HangmanDrawing numberOfGuesses={inCorrectLetters.length}/>}
     <HangmanWord showAnswer={isLoser} guessedLetters={guessedLetters} wordToGuess={wordToGuess}/>
     </>
@@ -87,10 +94,13 @@ const App=()=> {
      {!isWinner&&<HangmanDrawing numberOfGuesses={inCorrectLetters.length}/>}
     <AnswerAndWinContainer>
        <HangmanWord isWinner={isWinner} showAnswer={isLoser} guessedLetters={guessedLetters} wordToGuess={wordToGuess}/>
+      {isWinner||isLoser&&
       <WinOrLose isTablet={isTablet}>
-      {isWinner&&"You Win,refresh page to play again"}
-      {isLoser&&"You Lose,refresh page to play again"}
-    </WinOrLose>
+      {isWinner&&"You Win"}
+      {isLoser&&"You Lose"}
+      <RePlayButton onClick={resetGame}>Play Again</RePlayButton>
+    </WinOrLose>}
+      
     </AnswerAndWinContainer>
     </DesktopView>
     }
@@ -110,9 +120,26 @@ const App=()=> {
 
 
 export default App;
+
+const RePlayButton=styled.button`
+
+    display: inline-block;
+    margin-left: 20px;
+    color: rgb(255, 255, 255);
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    outline: none;
+    background-color: rgb(0, 196, 179);
+    font-family: "GT Eesti Text";
+    border-radius: 0px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+
+`
 const DesktopView=styled.div`
     display: flex;
-    gap: 13rem;
+    gap: 7rem;
     justify-content: center;
     align-items: center;
 `

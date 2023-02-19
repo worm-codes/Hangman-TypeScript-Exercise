@@ -26,7 +26,7 @@ export default HangmanWord
 const WordContainer=styled.div<{isTablet:boolean}>`
     display: flex;
     gap: .25em;
-    font-size: ${({isTablet})=>isTablet?'3rem':'4rem'};
+    font-size: ${({isTablet})=>isTablet?'2.4rem':'3rem'};
     font-weight: bold;
     text-transform: uppercase;
     font-family: monospace;
