@@ -30,7 +30,7 @@ export default Keyboard
 
 const KeyboardWrapper=styled.div<{isTablet:boolean}>`
   display: grid;
-  grid-template-columns: ${({isTablet})=>isTablet?' repeat(auto-fit,minmax(50px,1fr))':' repeat(auto-fit,minmax(80px,1fr))'};
+  grid-template-columns:  repeat(auto-fit,minmax(50px,1fr));
   gap: 0.5rem;
 `
 interface KeyboardButtonProps {
