@@ -71,8 +71,6 @@ const App=()=> {
   }
 
   },[])
-  console.log(isWinner,isLoser)
-  console.log(wordToGuess)
 
   const resetGame=()=>{
     setGuessedLetters([])
@@ -83,7 +81,10 @@ const App=()=> {
     
     {isTablet?
     <>
-     {
+     
+    {!isWinner&&<HangmanDrawing numberOfGuesses={inCorrectLetters.length}/>}
+    <HangmanWord isWinner={isWinner} showAnswer={isLoser} guessedLetters={guessedLetters} wordToGuess={wordToGuess}/>
+    {
      isGameFinished&&
      <WinOrLose isTablet={isTablet}>
       {isWinner && "You Win"}
@@ -91,8 +92,6 @@ const App=()=> {
       <RePlayButton onClick={resetGame}>Play Again</RePlayButton>
     </WinOrLose>
      }
-    {!isWinner&&<HangmanDrawing numberOfGuesses={inCorrectLetters.length}/>}
-    <HangmanWord isWinner={isWinner} showAnswer={isLoser} guessedLetters={guessedLetters} wordToGuess={wordToGuess}/>
     </>
     :
      <DesktopView>
@@ -132,16 +131,16 @@ const RePlayButton=styled.button`
 
     display: inline-block;
     margin-left: 20px;
-    color: rgb(255, 255, 255);
-    padding: 1rem 2rem;
-    border-radius: 0.5rem;
+    color: white;
+    font-weight: 600;
     outline: none;
-    background-color: rgb(0, 196, 179);
+    background-color: green;
     font-family: "GT Eesti Text";
-    border-radius: 0px;
+    border-radius: 40px;
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
     line-height: 1.5rem;
+    border: 1px solid white;
 
 `
 const DesktopView=styled.div`
