@@ -49,7 +49,7 @@ const KeyboardKey=styled.button<KeyboardButtonProps>`
   width: 100%;
   border: 3px solid black;
   background: none;
-  aspect-ratio: 1/1;
+  padding: 5px;
   font-size: 2.5rem;
   font-weight: bold;
   cursor: pointer;
