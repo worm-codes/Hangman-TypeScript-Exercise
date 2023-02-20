@@ -38,7 +38,7 @@ interface KeyboardButtonProps {
   readonly isInActive: boolean;
 }
 const KeyboardKey=styled.button<KeyboardButtonProps>`
-  width: 100%;
+  max-width: 50px;
   border: 3px solid black;
   background: none;
   aspect-ratio: 1/1;
