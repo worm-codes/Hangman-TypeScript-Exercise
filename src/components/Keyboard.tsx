@@ -10,7 +10,7 @@ type KeyboardProps={
 const Keyboard = ({activeLetters,inActiveLetters,addGuessedLetter,disabled}:KeyboardProps) => {
   const {isTablet}=useResponsive()
   return (
-    <div>
+    <KeyboardContainer>
       <KeyboardWrapper isTablet={isTablet}>
         {KEYS.map((key)=>{
         const isActive=activeLetters.includes(key)
@@ -22,23 +22,31 @@ const Keyboard = ({activeLetters,inActiveLetters,addGuessedLetter,disabled}:Keyb
           isInActive={isInActive}>{key}</KeyboardKey>
 })}
       </KeyboardWrapper>
-    </div>
+    </KeyboardContainer>
   )
 }
 
 export default Keyboard
 
+const KeyboardContainer=styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+`
+
 const KeyboardWrapper=styled.div<{isTablet:boolean}>`
   display: grid;
   grid-template-columns:  repeat(auto-fit,minmax(50px,1fr));
   gap: 0.5rem;
+  max-width: ${({isTablet})=>isTablet?'350px':'100%'};
 `
 interface KeyboardButtonProps {
   readonly isActive: boolean;
   readonly isInActive: boolean;
 }
 const KeyboardKey=styled.button<KeyboardButtonProps>`
-  max-width: 50px;
+  width: 100%;
   border: 3px solid black;
   background: none;
   aspect-ratio: 1/1;
