@@ -27,6 +27,7 @@ const App=()=> {
 
   const isLoser=inCorrectLetters.length>=6
   const isWinner=wordToGuess?.split('').every(letter=>guessedLetters.includes(letter))
+  const isGameFinished=isLoser||isWinner
 
   const addGuessedLetter=useCallback((letter:string)=>{
     if(guessedLetters.includes(letter)||isLoser||isWinner) return
@@ -70,36 +71,42 @@ const App=()=> {
   }
 
   },[])
+  console.log(isWinner,isLoser)
+  console.log(wordToGuess)
 
   const resetGame=()=>{
     setGuessedLetters([])
     setWordToGuess(getWord(isTablet))
   }
 
-  return  <WrapperContainer isGameFinished={isLoser||isWinner} isTablet={isTablet}>
+  return  <WrapperContainer isGameFinished={isGameFinished} isTablet={isTablet}>
     
     {isTablet?
     <>
-     {isWinner||isLoser&&
-     <WinOrLose>
-      {isWinner&&"You Win"}
-      {isLoser&&"You Lose"}
+     {
+     isGameFinished&&
+     <WinOrLose isTablet={isTablet}>
+      {isWinner && "You Win"}
+      {isLoser && "You Lose"}
       <RePlayButton onClick={resetGame}>Play Again</RePlayButton>
-    </WinOrLose>}
+    </WinOrLose>
+     }
     {!isWinner&&<HangmanDrawing numberOfGuesses={inCorrectLetters.length}/>}
-    <HangmanWord showAnswer={isLoser} guessedLetters={guessedLetters} wordToGuess={wordToGuess}/>
+    <HangmanWord isWinner={isWinner} showAnswer={isLoser} guessedLetters={guessedLetters} wordToGuess={wordToGuess}/>
     </>
     :
      <DesktopView>
      {!isWinner&&<HangmanDrawing numberOfGuesses={inCorrectLetters.length}/>}
     <AnswerAndWinContainer>
        <HangmanWord isWinner={isWinner} showAnswer={isLoser} guessedLetters={guessedLetters} wordToGuess={wordToGuess}/>
-      {isWinner||isLoser&&
+      {isGameFinished&&
+
       <WinOrLose isTablet={isTablet}>
       {isWinner&&"You Win"}
       {isLoser&&"You Lose"}
       <RePlayButton onClick={resetGame}>Play Again</RePlayButton>
-    </WinOrLose>}
+    </WinOrLose>
+    }
       
     </AnswerAndWinContainer>
     </DesktopView>
